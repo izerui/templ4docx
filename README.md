@@ -12,6 +12,15 @@ The recommended way to get started using templ4docx in your project is a depende
 </dependency>
 ```
 
+repository
+```
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
 [Direct link to jar file ](https://oss.sonatype.org/content/groups/public/pl/jsolve/templ4docx/2.0.0/templ4docx-2.0.0.jar)
 
 
