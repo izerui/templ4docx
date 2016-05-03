@@ -16,7 +16,7 @@ The recommended way to get started using templ4docx in your project is a depende
 
 
 ## Example usage
-
+basic variable
 ```
 Docx docx = new Docx("template.docx");
 docx.setVariablePattern(new VariablePattern("#{", "}"));
@@ -31,6 +31,39 @@ docx.fillTemplate(variables);
         
 // save filled .docx file
 docx.save("lstypka.docx");
+```
+
+table variable 
+```
+Docx docx = new Docx(resource.getPath());
+Variables var = new Variables();
+
+TableVariable tableVariable = new TableVariable();
+
+List<Variable> nameColumnVariables = new ArrayList<Variable>();
+List<Variable> logoColumnVariables = new ArrayList<Variable>();
+List<Variable> languagesColumnVariables = new ArrayList<Variable>();
+
+for (Student student : getStudents()) {
+    nameColumnVariables.add(new TextVariable("${name}", student.getName()));
+    logoColumnVariables.add(new ImageVariable("${logo}", student.getLogoPath(),40,40));
+
+    List<Variable> languages = new ArrayList<Variable>();
+    for (String language : student.getLanguages()) {
+        languages.add(new TextVariable("${languages}", language));
+    }
+    languagesColumnVariables.add(new BulletListVariable("${languages}", languages));
+}
+
+tableVariable.addVariable(nameColumnVariables);
+tableVariable.addVariable(logoColumnVariables);
+tableVariable.addVariable(languagesColumnVariables);
+
+var.addTableVariable(tableVariable);
+var.addTextVariable(new TextVariable("${title}","测试表"));
+var.addTextVariable(new TextVariable("${end}","结束"));
+docx.fillTemplate(var);
+docx.save("filledTable.docx");
 ```
 
 More details:
